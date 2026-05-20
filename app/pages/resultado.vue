@@ -171,14 +171,22 @@
         </div>
       </div>
 
-      <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 text-center space-y-3 print:hidden">
+      <div ref="rodape" class="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 text-center space-y-3 print:hidden">
         <p class="text-gray-700 font-medium">Quer avançar para a próxima etapa mais rápido?</p>
-        <button
-          class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition-all duration-200"
-          @click="refazer"
-        >
-          Refazer Diagnóstico
-        </button>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <button
+            class="bg-white border-2 border-indigo-200 text-indigo-600 hover:border-indigo-400 font-bold px-6 py-3 rounded-xl transition-all duration-200"
+            @click="refazer"
+          >
+            ↩ Refazer Diagnóstico
+          </button>
+          <button
+            class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition-all duration-200 shadow-md hover:-translate-y-0.5"
+            @click="modalAberto = true"
+          >
+            📋 Diagnóstico Completo
+          </button>
+        </div>
       </div>
     </main>
   </div>
@@ -196,13 +204,25 @@ const { gerarPdf } = usePdf()
 const secoes = SECOES
 const resultado = computed(() => store.resultado)
 const modalAberto = ref(false)
+const rodape = ref<HTMLElement | null>(null)
 
 onMounted(() => {
   if (store.totalScore === 0 && Object.keys(store.respostas).length === 0) {
     router.replace('/diagnostico')
     return
   }
-  setTimeout(() => { modalAberto.value = true }, 800)
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0]?.isIntersecting) {
+        setTimeout(() => { modalAberto.value = true }, 600)
+        observer.disconnect()
+      }
+    },
+    { threshold: 0.6 },
+  )
+
+  if (rodape.value) observer.observe(rodape.value)
 })
 
 const etapaBgClass = computed(() => ({
