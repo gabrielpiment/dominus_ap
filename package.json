@@ -1,0 +1,26 @@
+{
+  "name": "dominus-app",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview",
+    "generate": "nuxt generate",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "latest",
+    "nuxt": "latest",
+    "vue": "latest"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.11.3",
+    "chart.js": "^4.5.1",
+    "html2pdf.js": "^0.14.0",
+    "pinia": "^3.0.4",
+    "tailwindcss": "latest",
+    "vue-chartjs": "^5.3.3"
+  }
+}
