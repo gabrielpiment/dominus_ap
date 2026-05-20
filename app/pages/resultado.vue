@@ -111,7 +111,7 @@
           <p class="score-number text-indigo-600">{{ resultado.percentualGeral.toFixed(0) }}%</p>
           <p class="score-label">Grau de atendimento</p>
         </div>
-        <div class="print-score-card" :class="etapaBgClass">
+        <div class="print-score-card print-score-card--etapa" :class="etapaBgClass">
           <p class="score-number text-white">{{ resultado.etapa }}</p>
           <p class="score-label text-white opacity-80">Etapa atual</p>
         </div>
@@ -301,6 +301,11 @@ function refazer() {
   padding: 16px;
   text-align: center;
 }
+.print-score-card--etapa {
+  background: transparent !important;
+  border-color: transparent;
+}
+
 .score-number {
   font-size: 2rem;
   font-weight: 900;
