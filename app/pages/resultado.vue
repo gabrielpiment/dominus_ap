@@ -111,9 +111,9 @@
           <p class="score-number text-indigo-600">{{ resultado.percentualGeral.toFixed(0) }}%</p>
           <p class="score-label">Grau de atendimento</p>
         </div>
-        <div class="print-score-card print-score-card--etapa" :class="etapaBgClass">
-          <p class="score-number text-white">{{ resultado.etapa }}</p>
-          <p class="score-label text-white opacity-80">Etapa atual</p>
+        <div class="print-score-card print-score-card--etapa" :style="{ backgroundColor: etapaBgColor }">
+          <p class="score-number" style="color: white;">{{ resultado.etapa }}</p>
+          <p class="score-label" style="color: rgba(255,255,255,0.8);">Etapa atual</p>
         </div>
       </div>
 
@@ -230,6 +230,13 @@ const etapaBgClass = computed(() => ({
   B: 'bg-yellow-400',
   C: 'bg-orange-500',
   D: 'bg-red-600',
+}[store.infoEtapa.etapa]))
+
+const etapaBgColor = computed(() => ({
+  A: '#22c55e',
+  B: '#facc15',
+  C: '#f97316',
+  D: '#dc2626',
 }[store.infoEtapa.etapa]))
 
 const etapaBorderClass = computed(() => ({
