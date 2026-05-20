@@ -21,6 +21,80 @@
       </div>
     </header>
 
+    <!-- Modal de consultoria -->
+    <Transition name="modal">
+      <div
+        v-if="modalAberto"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 print:hidden"
+        @click.self="modalAberto = false"
+      >
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" @click="modalAberto = false" />
+
+        <!-- Card -->
+        <div class="relative bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
+          <!-- Topo colorido -->
+          <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 px-7 pt-8 pb-10 text-white text-center">
+            <div class="text-4xl mb-3">🎯</div>
+            <span class="inline-block bg-white/20 text-white text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-3">
+              Pré-diagnóstico concluído
+            </span>
+            <h2 class="text-2xl font-black leading-tight">
+              Seu pré-diagnóstico<br />está pronto!
+            </h2>
+          </div>
+
+          <!-- Onda decorativa -->
+          <div class="-mt-6 overflow-hidden">
+            <svg viewBox="0 0 400 24" class="w-full fill-white">
+              <path d="M0,24 C100,0 300,0 400,24 Z" />
+            </svg>
+          </div>
+
+          <div class="px-7 pb-7 -mt-2 space-y-4 text-center">
+            <p class="text-gray-700 text-sm leading-relaxed">
+              Este resultado é um <strong>pré-diagnóstico</strong> baseado nas suas respostas.
+              Para ter uma análise mais aprofundada e saber exatamente o que sua empresa precisa,
+              recomendamos uma consultoria <strong class="text-indigo-600">100% gratuita</strong> com um dos nossos especialistas.
+            </p>
+
+            <div class="bg-indigo-50 rounded-2xl px-5 py-4 text-left space-y-2">
+              <p class="text-xs font-bold text-indigo-700 uppercase tracking-wide">O que você vai conquistar:</p>
+              <ul class="space-y-1.5">
+                <li class="flex items-start gap-2 text-sm text-gray-700">
+                  <span class="text-green-500 font-bold mt-0.5">✓</span>
+                  Diagnóstico completo e personalizado da sua empresa
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-700">
+                  <span class="text-green-500 font-bold mt-0.5">✓</span>
+                  Sair do improviso e conquistar previsibilidade
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-700">
+                  <span class="text-green-500 font-bold mt-0.5">✓</span>
+                  Plano de ação claro para avançar de etapa
+                </li>
+              </ul>
+            </div>
+
+            <a
+              href="https://wa.me/5511999999999?text=Olá!%20Fiz%20o%20diagnóstico%20e%20gostaria%20de%20agendar%20uma%20consultoria%20gratuita."
+              target="_blank"
+              class="block w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-2xl text-base transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-green-200"
+            >
+              📅 Agendar consultoria gratuita
+            </a>
+
+            <button
+              class="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+              @click="modalAberto = false"
+            >
+              Agora não, quero ver meu resultado
+            </button>
+          </div>
+        </div>
+      </div>
+    </Transition>
+
     <main class="max-w-3xl mx-auto px-4 py-8 space-y-6 print:px-0 print:py-0 print:space-y-4 print:max-w-none">
       <div class="text-center space-y-1 print:mb-4">
         <h1 class="text-2xl font-black text-gray-900">Diagnóstico Empresarial 360°</h1>
@@ -121,11 +195,14 @@ const router = useRouter()
 const { gerarPdf } = usePdf()
 const secoes = SECOES
 const resultado = computed(() => store.resultado)
+const modalAberto = ref(false)
 
 onMounted(() => {
   if (store.totalScore === 0 && Object.keys(store.respostas).length === 0) {
     router.replace('/diagnostico')
+    return
   }
+  setTimeout(() => { modalAberto.value = true }, 800)
 })
 
 const etapaBgClass = computed(() => ({
@@ -165,6 +242,12 @@ function refazer() {
 </script>
 
 <style>
+/* ── Modal ── */
+.modal-enter-active { transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.modal-leave-active { transition: all 0.2s ease; }
+.modal-enter-from   { opacity: 0; transform: scale(0.88); }
+.modal-leave-to     { opacity: 0; transform: scale(0.95); }
+
 /* ── Print / PDF styles ── */
 @media print {
   @page {
