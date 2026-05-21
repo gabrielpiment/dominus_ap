@@ -77,7 +77,7 @@
             </div>
 
             <a
-              href="https://wa.me/553291397104?text=Ol%C3%A1!%20Fiz%20o%20diagn%C3%B3stico%20empresarial%20360%C2%B0%20e%20gostaria%20de%20agendar%20minha%20consultoria%20gratuita."
+              :href="whatsappLink"
               target="_blank"
               class="block w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-2xl text-base transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-green-200"
             >
@@ -231,6 +231,24 @@ const etapaBgClass = computed(() => ({
   C: 'bg-orange-500',
   D: 'bg-red-600',
 }[store.infoEtapa.etapa]))
+
+const whatsappLink = computed(() => {
+  const r = resultado.value
+  const info = store.infoEtapa
+  const msg = [
+    `Olá! Acabei de fazer o Diagnóstico Empresarial 360° e gostaria de agendar minha consultoria gratuita.`,
+    ``,
+    `📊 *Meu resultado:*`,
+    `• Pontuação: ${r.totalScore.toFixed(1)}/50`,
+    `• Grau de atendimento: ${r.percentualGeral.toFixed(0)}%`,
+    `• Etapa atual: *${r.etapa}* — ${info.slogan}`,
+    ``,
+    `${info.perfil}`,
+    ``,
+    `Aguardo o contato! 🚀`,
+  ].join('\n')
+  return `https://wa.me/553291397104?text=${encodeURIComponent(msg)}`
+})
 
 const etapaBgColor = computed(() => ({
   A: '#22c55e',
