@@ -1,46 +1,39 @@
 <template>
-  <div id="secao-card-root" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="text-2xl">{{ secao.icone }}</span>
+  <div class="bg-dominus-surface border border-dominus-border rounded-xl p-5 relative overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dominus-gold/30 to-transparent" />
+
+    <div class="flex items-start justify-between gap-4 mb-3">
       <div class="flex-1 min-w-0">
-        <h4 class="font-bold text-gray-900 text-sm truncate">{{ secao.titulo }}</h4>
-        <p class="text-xs text-gray-400">{{ secao.foco }}</p>
+        <p class="text-[9px] font-black tracking-[2px] uppercase text-dominus-subtle mb-1">{{ secao.icone }} {{ secao.foco }}</p>
+        <h4 class="font-black text-white text-sm">{{ secao.titulo }}</h4>
       </div>
-      <div class="text-right shrink-0">
-        <span class="text-2xl font-black" :class="scoreColor">{{ score.toFixed(1) }}</span>
-        <span class="text-xs text-gray-400">/10</span>
+      <div class="text-right flex-shrink-0">
+        <span class="font-display text-2xl font-black" :style="{ color: corScore }">
+          {{ score.toFixed(1) }}
+        </span>
+        <span class="text-dominus-subtle text-xs">/10</span>
       </div>
     </div>
 
-    <div class="w-full bg-gray-100 rounded-full h-1.5 mb-3">
+    <div class="h-1 bg-dominus-elevated rounded-full overflow-hidden mb-4">
       <div
-        class="h-1.5 rounded-full transition-all duration-700"
-        :class="barColor"
-        :style="{ width: `${(score / 10) * 100}%` }"
+        class="h-full rounded-full transition-all duration-700"
+        :style="{ width: `${(score / 10) * 100}%`, background: corScore }"
       />
     </div>
 
-    <p class="text-xs text-gray-600 leading-relaxed">{{ secao.recomendacao }}</p>
+    <p class="text-dominus-muted text-xs leading-relaxed">{{ secao.recomendacao }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { Secao } from '~/shared/types/Diagnostico'
 
-const props = defineProps<{
-  secao: Secao
-  score: number
-}>()
+const props = defineProps<{ secao: Secao; score: number }>()
 
-const scoreColor = computed(() => {
-  if (props.score >= 8) return 'text-green-600'
-  if (props.score >= 5) return 'text-yellow-500'
-  return 'text-red-500'
-})
-
-const barColor = computed(() => {
-  if (props.score >= 8) return 'bg-green-500'
-  if (props.score >= 5) return 'bg-yellow-400'
-  return 'bg-red-500'
+const corScore = computed(() => {
+  if (props.score >= 8) return '#22c55e'
+  if (props.score >= 5) return '#C9A84C'
+  return '#ef4444'
 })
 </script>

@@ -61,7 +61,7 @@ export const useDiagnosticoStore = defineStore('diagnostico', () => {
 
   const infoEtapa = computed(() => INFO_ETAPAS[etapa.value])
 
-  const secaoAtual = computed(() => SECOES[stepAtual.value])
+  const secaoAtual = computed(() => SECOES[stepAtual.value] ?? SECOES[0]!)
 
   const progresso = computed(() =>
     Math.round(((stepAtual.value) / SECOES.length) * 100)
