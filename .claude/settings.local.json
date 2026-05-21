@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(cp assets/css/main.css app/assets/css/main.css)",
-      "Bash(cp layouts/default.vue app/layouts/default.vue)",
-      "Bash(cp pages/index.vue app/pages/index.vue)"
-    ]
-  }
-}
