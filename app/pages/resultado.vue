@@ -308,11 +308,6 @@ function refazer() {
   padding: 16px;
   text-align: center;
 }
-.print-score-card--etapa {
-  background: transparent !important;
-  border-color: transparent;
-}
-
 .score-number {
   font-size: 2rem;
   font-weight: 900;
