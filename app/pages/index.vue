@@ -10,27 +10,27 @@
     <div class="absolute inset-0 bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40 pointer-events-none z-0" />
 
     <!-- Sticky Header -->
-    <header class="sticky top-0 z-40 w-full border-b border-dominus-border/40 backdrop-blur-md bg-dominus-void/80 transition-all duration-300">
-      <div class="px-6 py-4 flex items-center justify-between max-w-5xl mx-auto w-full">
-        <div class="flex items-center gap-3 group cursor-pointer" @click="router.push('/')">
-          <div class="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-dominus-gold/20 to-dominus-gold/5 border border-dominus-gold/30 group-hover:border-dominus-gold/60 transition-all duration-300 shadow-[0_0_15px_rgba(201,168,76,0.1)]">
-            <svg viewBox="0 0 36 36" fill="none" class="w-5 h-5 transition-transform duration-500 group-hover:rotate-12">
+    <header class="sticky top-0 z-45 w-full border-b border-dominus-border/40 backdrop-blur-md bg-dominus-void/80 transition-all duration-300">
+      <div class="px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between max-w-5xl mx-auto w-full">
+        <div class="flex items-center gap-2 sm:gap-3 group cursor-pointer" @click="router.push('/')">
+          <div class="relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-dominus-gold/20 to-dominus-gold/5 border border-dominus-gold/30 group-hover:border-dominus-gold/60 transition-all duration-300 shadow-[0_0_15px_rgba(201,168,76,0.1)]">
+            <svg viewBox="0 0 36 36" fill="none" class="w-[18px] h-[18px] sm:w-5 sm:h-5 transition-transform duration-500 group-hover:rotate-12">
               <path d="M18 2L22 10H30L24 16L26 24L18 20L10 24L12 16L6 10H14L18 2Z" fill="#C9A84C" opacity="0.9"/>
               <rect x="12" y="26" width="12" height="2" rx="1" fill="#C9A84C"/>
               <rect x="14" y="30" width="8" height="2" rx="1" fill="#C9A84C"/>
             </svg>
             <div class="absolute inset-0 rounded-xl bg-dominus-gold/20 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300" />
           </div>
-          <span class="font-sans text-lg font-black tracking-[4px] text-white group-hover:text-dominus-gold transition-colors duration-300">DOMINUS</span>
+          <span class="font-sans text-base sm:text-lg font-black tracking-[2px] sm:tracking-[4px] text-white group-hover:text-dominus-gold transition-colors duration-300">DOMINUS</span>
         </div>
         
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3 sm:gap-4">
           <span class="hidden sm:inline-flex text-[9px] font-black tracking-[2px] uppercase text-dominus-gold border border-dominus-gold/30 px-3 py-1.5 rounded-full bg-dominus-gold/5 backdrop-blur-sm">
             MÉTODO DOMINUS
           </span>
           <button 
             @click="abrirModal"
-            class="text-[9px] font-black tracking-[1.5px] uppercase text-dominus-void bg-gradient-to-r from-dominus-gold via-dominus-gold-light to-dominus-gold hover:opacity-95 px-4 py-2 rounded-lg transition-all duration-300 shadow-[0_4px_12px_rgba(201,168,76,0.15)] hover:-translate-y-0.5"
+            class="text-[9px] font-black tracking-[1px] sm:tracking-[1.5px] uppercase text-dominus-void bg-gradient-to-r from-dominus-gold via-dominus-gold-light to-dominus-gold hover:opacity-95 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-all duration-300 shadow-[0_4px_12px_rgba(201,168,76,0.15)] hover:-translate-y-0.5"
           >
             Iniciar Diagnóstico
           </button>
