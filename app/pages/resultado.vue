@@ -73,7 +73,7 @@
 
               <!-- Coluna do Calendar (9 cols) -->
               <div class="lg:col-span-9 order-1 lg:order-2">
-                <div class="w-full h-[950px] sm:h-[800px] lg:h-[700px] overflow-hidden rounded-xl border border-dominus-border bg-dominus-void relative">
+                <div class="w-full h-[1100px] sm:h-[850px] lg:h-[700px] overflow-hidden rounded-xl border border-dominus-border bg-dominus-void relative">
                   <div class="w-full h-full overflow-hidden" id="my-cal-inline-60min"></div>
                 </div>
 
@@ -558,6 +558,20 @@ watch(modalAberto, (isOpen) => {
 </script>
 
 <style>
+#my-cal-inline-60min iframe {
+  height: 1100px !important;
+}
+@media (min-width: 640px) {
+  #my-cal-inline-60min iframe {
+    height: 850px !important;
+  }
+}
+@media (min-width: 1024px) {
+  #my-cal-inline-60min iframe {
+    height: 700px !important;
+  }
+}
+
 .modal-enter-active { transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .modal-leave-active { transition: all 0.2s ease; }
 .modal-enter-from   { opacity: 0; transform: scale(0.9); }
