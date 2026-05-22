@@ -76,6 +76,26 @@
                 <div class="w-full h-[700px] sm:h-[600px] lg:h-[660px] overflow-hidden rounded-xl border border-dominus-border bg-dominus-void relative">
                   <div class="w-full h-full overflow-hidden" id="my-cal-inline-60min"></div>
                 </div>
+
+                <!-- Fallback de Agendamento via WhatsApp -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl border border-dominus-border/30 bg-dominus-surface/30 backdrop-blur-sm mt-4">
+                  <div class="text-left space-y-1">
+                    <p class="text-xs font-bold text-white">Está com problemas para agendar pelo calendário?</p>
+                    <p class="text-[10px] text-dominus-muted leading-relaxed">
+                      Se o calendário estiver travado ou com erro, você pode falar diretamente conosco no WhatsApp com seus resultados já preenchidos.
+                    </p>
+                  </div>
+                  <a
+                    :href="whatsappLink"
+                    target="_blank"
+                    class="inline-flex items-center justify-center gap-2 text-xs font-black tracking-wider uppercase text-white bg-green-600/20 border border-green-500/40 hover:bg-green-600/40 px-5 py-3 rounded-lg transition-all duration-300 w-full sm:w-auto text-center cursor-pointer shadow-[0_2px_10px_rgba(34,197,94,0.05)] hover:border-green-500"
+                  >
+                    <svg class="w-4 h-4 text-green-500 fill-current" viewBox="0 0 24 24">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.864-9.864.002-2.637-1.017-5.114-2.872-6.973-1.857-1.859-4.335-2.88-6.97-2.882-5.437 0-9.863 4.42-9.867 9.864-.001 1.73.457 3.419 1.32 4.933l-.994 3.635 3.718-.974zm12.015-7.145c-.19-.095-1.125-.556-1.3-.62-.174-.063-.3-.095-.426.095-.126.19-.488.62-.597.746-.109.127-.218.142-.408.048-.19-.095-.803-.296-1.53-.944-.566-.505-.948-1.13-1.059-1.32-.11-.19-.012-.293.083-.388.085-.085.19-.22.285-.33.095-.11.127-.19.19-.317.063-.127.032-.238-.016-.333-.048-.095-.426-1.026-.583-1.405-.154-.37-.323-.32-.426-.326l-.364-.006c-.127 0-.332.048-.506.238-.174.19-.664.65-.664 1.585 0 .935.68 1.839.775 1.965.095.127 1.34 2.046 3.245 2.87.453.196.806.314 1.08.401.455.144.869.124 1.198.075.366-.054 1.125-.46 1.282-.905.158-.445.158-.825.11-.905-.047-.08-.174-.127-.364-.222z"/>
+                    </svg>
+                    Agendar via WhatsApp
+                  </a>
+                </div>
               </div>
 
             </div>
