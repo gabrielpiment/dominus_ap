@@ -35,7 +35,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
               
               <!-- Coluna de Informações / Benefícios (3 cols) -->
-              <div class="lg:col-span-3 flex flex-col justify-between gap-5">
+              <div class="lg:col-span-3 flex flex-col justify-between gap-5 order-2 lg:order-1">
                 <div class="bg-dominus-void border border-dominus-border rounded-xl p-6 flex-1 flex flex-col justify-between gap-6">
                   
                   <!-- Topo do card -->
@@ -72,8 +72,8 @@
               </div>
 
               <!-- Coluna do Calendar (9 cols) -->
-              <div class="lg:col-span-9">
-                <div class="w-full h-[550px] sm:h-[600px] lg:h-[660px] overflow-hidden rounded-xl border border-dominus-border bg-dominus-void relative">
+              <div class="lg:col-span-9 order-1 lg:order-2">
+                <div class="w-full h-[700px] sm:h-[600px] lg:h-[660px] overflow-hidden rounded-xl border border-dominus-border bg-dominus-void relative">
                   <div class="w-full h-full overflow-hidden" id="my-cal-inline-60min"></div>
                 </div>
               </div>
