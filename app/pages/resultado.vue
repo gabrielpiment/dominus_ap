@@ -73,7 +73,7 @@
 
               <!-- Coluna do Calendar (9 cols) -->
               <div class="lg:col-span-9 order-1 lg:order-2">
-                <div class="w-full h-[700px] sm:h-[600px] lg:h-[660px] overflow-hidden rounded-xl border border-dominus-border bg-dominus-void relative">
+                <div class="w-full h-[950px] sm:h-[800px] lg:h-[700px] overflow-hidden rounded-xl border border-dominus-border bg-dominus-void relative">
                   <div class="w-full h-full overflow-hidden" id="my-cal-inline-60min"></div>
                 </div>
 
@@ -514,7 +514,7 @@ onMounted(async () => {
 
   C.Cal.ns["60min"]("ui", {
     theme: "dark",
-    hideEventTypeDetails: false,
+    hideEventTypeDetails: true,
     layout: "month_view"
   });
 })
@@ -546,7 +546,7 @@ watch(modalAberto, (isOpen) => {
 
       C.Cal.ns["60min"]("ui", {
         theme: "dark",
-        hideEventTypeDetails: false,
+        hideEventTypeDetails: true,
         layout: "month_view"
       });
     })
