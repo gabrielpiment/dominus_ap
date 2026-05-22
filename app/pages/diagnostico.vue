@@ -1,18 +1,18 @@
 <template>
-  <div class="min-h-screen bg-dominus-void flex flex-col">
+  <div class="min-h-screen bg-slate-50 flex flex-col">
 
     <!-- Tela de carregamento -->
     <Transition name="fade">
       <div
         v-if="carregando"
-        class="fixed inset-0 z-50 bg-dominus-void flex flex-col items-center justify-center px-8"
+        class="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center px-8"
       >
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,168,76,0.04)_0%,transparent_70%)]" />
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,168,76,0.05)_0%,transparent_70%)]" />
 
         <div class="max-w-md w-full text-center space-y-10 relative z-10">
           <!-- Spinner -->
           <div class="relative mx-auto w-24 h-24">
-            <div class="absolute inset-0 rounded-full border border-dominus-border" />
+            <div class="absolute inset-0 rounded-full border border-slate-100" />
             <div class="absolute inset-0 rounded-full border-2 border-transparent border-t-dominus-gold animate-spin" />
             <div class="absolute inset-2 rounded-full border border-transparent border-t-dominus-gold/40 animate-spin" style="animation-duration:1.8s; animation-direction:reverse;" />
             <div class="absolute inset-0 flex items-center justify-center">
@@ -24,30 +24,30 @@
             </div>
           </div>
 
-          <!-- Mensagem -->
+          <!-- Mensagem rotativa -->
           <div class="h-24 flex flex-col items-center justify-center">
             <Transition name="msg" mode="out-in">
               <div :key="msgAtual" class="text-center space-y-2 px-4">
-                <p class="font-display text-xl font-black text-dominus-gold leading-snug">
+                <p class="font-display text-xl font-black text-slate-900 leading-snug">
                   {{ mensagens[msgAtual]?.titulo }}
                 </p>
-                <p class="text-dominus-muted text-sm leading-relaxed">
+                <p class="text-slate-500 text-sm leading-relaxed">
                   {{ mensagens[msgAtual]?.subtitulo }}
                 </p>
               </div>
             </Transition>
           </div>
 
-          <!-- Progress -->
+          <!-- Barra de progresso -->
           <div class="space-y-2">
-            <div class="h-px bg-dominus-elevated overflow-hidden rounded-full">
+            <div class="h-1 bg-slate-100 overflow-hidden rounded-full">
               <div
                 class="h-full transition-all ease-linear"
                 style="background: linear-gradient(90deg, #C9A84C, #E8CC80); transition-duration: 100ms;"
                 :style="{ width: `${progressoCarregamento}%` }"
               />
             </div>
-            <p class="text-[10px] font-bold tracking-[3px] uppercase text-dominus-subtle">
+            <p class="text-[10px] font-bold tracking-[3px] uppercase text-slate-400">
               {{ progressoCarregamento.toFixed(0) }}% concluído
             </p>
           </div>
@@ -56,16 +56,16 @@
     </Transition>
 
     <!-- Header -->
-    <header class="border-b border-dominus-border px-6 py-4 bg-dominus-void/80 backdrop-blur-sm sticky top-0 z-10">
+    <header class="border-b border-slate-100 px-6 py-4 bg-white/90 backdrop-blur-sm sticky top-0 z-10">
       <div class="max-w-2xl mx-auto flex items-center justify-between">
-        <NuxtLink to="/" class="flex items-center gap-2 text-dominus-subtle hover:text-dominus-gold text-xs font-bold tracking-[2px] uppercase transition-colors">
+        <NuxtLink to="/" class="flex items-center gap-2 text-slate-500 hover:text-dominus-gold-dark text-xs font-bold tracking-[2px] uppercase transition-colors">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
           </svg>
           Voltar
         </NuxtLink>
-        <span class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold">Diagnóstico 360°</span>
-        <span class="text-[10px] font-bold text-dominus-subtle tracking-wider">{{ store.stepAtual + 1 }}/{{ totalSteps }}</span>
+        <span class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold-dark">Diagnóstico 360°</span>
+        <span class="text-[10px] font-bold text-slate-400 tracking-wider">{{ store.stepAtual + 1 }}/{{ totalSteps }}</span>
       </div>
     </header>
 
@@ -81,11 +81,11 @@
         <Transition :name="direcao" mode="out-in">
           <div
             :key="store.stepAtual"
-            class="bg-dominus-surface border border-dominus-border rounded-xl p-6 sm:p-8 relative overflow-hidden"
+            class="bg-white border border-slate-100 shadow-[0_4px_24px_rgba(0,0,0,0.02)] rounded-2xl p-6 sm:p-8 relative overflow-hidden"
           >
-            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dominus-gold/50 to-transparent" />
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dominus-gold/30 to-transparent" />
             <QuestionarioStep
-              :secao="store.secaoAtual"
+              :pilar="store.pilarAtual"
               :respostas="store.respostas"
               @responder="store.responder"
             />
@@ -96,7 +96,7 @@
         <div class="flex gap-3">
           <button
             v-if="store.stepAtual > 0"
-            class="flex-1 py-3.5 rounded-lg border border-dominus-border text-dominus-subtle text-[11px] font-black tracking-[2px] uppercase hover:border-dominus-subtle transition-all duration-200"
+            class="flex-1 py-3.5 rounded-lg border border-slate-200 bg-white text-slate-600 text-[11px] font-black tracking-[2px] uppercase hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
             @click="anterior"
           >
             ← Anterior
@@ -104,18 +104,18 @@
           <button
             class="flex-1 py-3.5 rounded-lg text-[11px] font-black tracking-[2px] uppercase transition-all duration-200"
             :class="store.todasRespondidas
-              ? 'text-dominus-void shadow-[0_0_20px_rgba(201,168,76,0.2)] hover:-translate-y-0.5'
-              : 'bg-dominus-elevated text-dominus-subtle cursor-not-allowed'"
+              ? 'text-dominus-void shadow-[0_4px_14px_rgba(201,168,76,0.25)] hover:-translate-y-0.5'
+              : 'bg-slate-100 text-slate-400 cursor-not-allowed'"
             :style="store.todasRespondidas ? 'background: linear-gradient(135deg, #C9A84C, #E8CC80, #C9A84C)' : ''"
             :disabled="!store.todasRespondidas"
             @click="proxima"
           >
-            {{ store.stepAtual === totalSteps - 1 ? 'Ver Resultado →' : 'Próxima →' }}
+            {{ store.stepAtual === totalSteps - 1 ? 'Ver Resultado →' : 'Próximo Pilar →' }}
           </button>
         </div>
 
-        <p v-if="!store.todasRespondidas" class="text-center text-[10px] font-bold tracking-[2px] uppercase text-dominus-subtle">
-          Responda todas as perguntas para continuar
+        <p v-if="!store.todasRespondidas" class="text-center text-[10px] font-bold tracking-[2px] uppercase text-slate-400">
+          Responda todas as {{ store.pilarAtual.perguntas.length }} perguntas para continuar
         </p>
       </div>
     </main>
@@ -123,14 +123,16 @@
 </template>
 
 <script setup lang="ts">
-import { SECOES } from '~/shared/types/Diagnostico'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { PILARES } from '~/shared/types/Diagnostico'
 import { useDiagnosticoStore } from '~/stores/diagnostico'
 
 definePageMeta({ layout: false })
 
 const store = useDiagnosticoStore()
 const router = useRouter()
-const totalSteps = SECOES.length
+const totalSteps = PILARES.length
 const direcao = ref<'slide-left' | 'slide-right'>('slide-left')
 const carregando = ref(false)
 const progressoCarregamento = ref(0)
@@ -139,11 +141,11 @@ const DURACAO_MS = 10_000
 
 const mensagens = [
   { titulo: 'Analisando suas respostas...', subtitulo: 'Processando cada resposta com atenção.' },
-  { titulo: 'Calculando sua pontuação...', subtitulo: 'Cruzando os dados das 5 alavancas comerciais.' },
-  { titulo: 'Identificando sua etapa...', subtitulo: 'Comparando com perfis de empresas de alto desempenho.' },
+  { titulo: 'Calculando pontuação por pilar...', subtitulo: 'Avaliando os 4 pilares de maturidade comercial.' },
+  { titulo: 'Identificando sua classificação...', subtitulo: 'Comparando com perfis de empresas de alto desempenho.' },
   { titulo: 'Mapeando pontos de melhoria...', subtitulo: 'Encontrando as oportunidades mais valiosas.' },
-  { titulo: 'Preparando suas recomendações...', subtitulo: 'Personalizando o plano de ação para sua realidade.' },
-  { titulo: 'Quase lá!', subtitulo: 'Em instantes você terá um diagnóstico completo.' },
+  { titulo: 'Gerando análise combinada...', subtitulo: 'Cruzando os dados dos pilares para insights estratégicos.' },
+  { titulo: 'Quase lá!', subtitulo: 'Em instantes você terá seu diagnóstico completo de maturidade.' },
 ]
 
 function anterior() {

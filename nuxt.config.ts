@@ -4,7 +4,17 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
+    '@nuxtjs/supabase',
   ],
+  supabase: {
+    useSsrCookies: true,
+    redirect: false,
+  },
+  runtimeConfig: {
+    public: {
+      calLink: process.env.NUXT_PUBLIC_CAL_LINK || 'metodo-dominus/60min'
+    }
+  },
   css: ['~/assets/css/main.css'],
   app: {
     head: {

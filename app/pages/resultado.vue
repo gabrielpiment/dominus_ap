@@ -1,7 +1,9 @@
 <template>
   <div class="min-h-screen bg-dominus-void">
 
-    <!-- Modal de consultoria -->
+    <!-- ═══════════════════════════════════════════════
+         Modal de Consultoria
+    ════════════════════════════════════════════════ -->
     <Transition name="modal">
       <div
         v-if="modalAberto"
@@ -10,61 +12,81 @@
       >
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="modalAberto = false" />
 
-        <div class="relative bg-dominus-surface border border-dominus-border rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dominus-gold to-transparent" />
+        <div class="relative bg-dominus-surface border border-dominus-border rounded-2xl shadow-2xl max-w-3xl lg:max-w-7xl w-full overflow-hidden max-h-[95vh] lg:max-h-[90vh] flex flex-col">
+          <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-dominus-gold to-transparent" />
 
-          <!-- Topo -->
-          <div class="px-7 pt-8 pb-6 text-center space-y-3 border-b border-dominus-border">
-            <svg viewBox="0 0 36 36" fill="none" class="w-10 h-10 mx-auto">
+          <!-- Topo do modal -->
+          <div class="px-8 pt-8 pb-6 text-center space-y-3.5 border-b border-dominus-border flex-shrink-0">
+            <svg viewBox="0 0 36 36" fill="none" class="w-9 h-9 mx-auto">
               <path d="M18 2L22 10H30L24 16L26 24L18 20L10 24L12 16L6 10H14L18 2Z" fill="#C9A84C" opacity="0.9"/>
               <rect x="12" y="26" width="12" height="2" rx="1" fill="#C9A84C"/>
               <rect x="14" y="30" width="8" height="2" rx="1" fill="#C9A84C"/>
             </svg>
-            <span class="inline-block text-[9px] font-black tracking-[3px] uppercase px-3 py-1 rounded-sm bg-dominus-gold/10 border border-dominus-gold/30 text-dominus-gold">
-              Pré-diagnóstico concluído
-            </span>
-            <h2 class="font-display text-2xl font-black text-dominus-gold leading-tight">
-              Seu pré-diagnóstico<br />está pronto!
+            <h2 class="font-display text-2xl sm:text-3xl font-black text-dominus-gold leading-tight">
+              📅 Agende sua Mentoria Gratuita
             </h2>
+            <p class="text-dominus-muted text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
+              Este resultado é um <strong class="text-white">pré-diagnóstico automático</strong>. Selecione o melhor dia e horário abaixo para realizar a sua mentoria individual estratégica com um especialista.
+            </p>
           </div>
 
-          <div class="px-7 py-6 space-y-5">
-            <p class="text-dominus-muted text-sm leading-relaxed text-center">
-              Este resultado é um <strong class="text-white">pré-diagnóstico</strong>. Para uma análise mais aprofundada, recomendamos uma consultoria
-              <strong class="text-dominus-gold">100% gratuita</strong> com um dos nossos especialistas.
-            </p>
+          <!-- Conteúdo -->
+          <div class="flex-1 overflow-y-auto p-6 lg:p-8 space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              
+              <!-- Coluna de Informações / Benefícios (3 cols) -->
+              <div class="lg:col-span-3 flex flex-col justify-between gap-5">
+                <div class="bg-dominus-void border border-dominus-border rounded-xl p-6 flex-1 flex flex-col justify-between gap-6">
+                  
+                  <!-- Topo do card -->
+                  <div class="space-y-3">
+                    <span class="inline-block text-[9px] font-black tracking-[2px] uppercase px-3 py-1 rounded bg-dominus-gold/10 border border-dominus-gold/25 text-dominus-gold">
+                      Mentoria Individual
+                    </span>
+                    <h3 class="text-xs sm:text-sm font-black tracking-[1.5px] uppercase text-white">
+                      O que faremos na sessão:
+                    </h3>
+                  </div>
 
-            <div class="bg-dominus-void border border-dominus-border rounded-xl px-5 py-4 space-y-3">
-              <p class="text-[9px] font-black tracking-[2px] uppercase text-dominus-gold">O que você vai conquistar:</p>
-              <ul class="space-y-2">
-                <li v-for="item in beneficios" :key="item" class="flex items-start gap-2.5 text-xs text-dominus-muted">
-                  <span class="text-dominus-gold font-black mt-0.5 flex-shrink-0">✓</span>
-                  {{ item }}
-                </li>
-              </ul>
+                  <!-- Benefícios -->
+                  <ul class="space-y-4 flex-1 flex flex-col justify-center py-4">
+                    <li v-for="b in beneficios" :key="b" class="flex items-center gap-3.5 text-xs sm:text-sm text-dominus-muted leading-relaxed bg-dominus-surface/30 border border-dominus-border/20 rounded-lg p-4 transition-all hover:border-dominus-gold/30">
+                      <span class="w-6 h-6 rounded-full bg-dominus-gold/10 border border-dominus-gold/30 flex items-center justify-center text-dominus-gold font-black text-xs flex-shrink-0">✓</span>
+                      <span class="font-medium text-slate-300">{{ b }}</span>
+                    </li>
+                  </ul>
+
+                  <!-- Rodapé interno / Info adicional -->
+                  <div class="text-[10px] text-dominus-subtle text-center italic border-t border-dominus-border/30 pt-4 flex-shrink-0">
+                    Sessão individual de 60 minutos via videoconferência.
+                  </div>
+
+                </div>
+
+                <button
+                  class="w-full text-center text-xs text-dominus-subtle hover:text-dominus-muted tracking-widest font-black uppercase transition-colors py-4 border border-dominus-border/40 hover:border-dominus-border rounded-xl flex-shrink-0"
+                  @click="modalAberto = false"
+                >
+                  Ver Resultado Completo
+                </button>
+              </div>
+
+              <!-- Coluna do Calendar (9 cols) -->
+              <div class="lg:col-span-9">
+                <div class="w-full h-[550px] sm:h-[600px] lg:h-[660px] overflow-hidden rounded-xl border border-dominus-border bg-dominus-void relative">
+                  <div class="w-full h-full overflow-hidden" id="my-cal-inline-60min"></div>
+                </div>
+              </div>
+
             </div>
-
-            <a
-              :href="whatsappLink"
-              target="_blank"
-              class="block w-full text-center font-black text-[11px] tracking-[2px] uppercase text-dominus-void py-4 rounded-xl transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 shadow-lg shadow-dominus-gold/20"
-              style="background: linear-gradient(135deg, #C9A84C, #E8CC80, #C9A84C);"
-            >
-              📅 Agendar consultoria gratuita
-            </a>
-
-            <button
-              class="block w-full text-center text-[10px] text-dominus-subtle hover:text-dominus-muted tracking-wider transition-colors"
-              @click="modalAberto = false"
-            >
-              Agora não, quero ver meu resultado
-            </button>
           </div>
         </div>
       </div>
     </Transition>
 
-    <!-- Header -->
+    <!-- ═══════════════════════════════════════════════
+         Header
+    ════════════════════════════════════════════════ -->
     <header class="border-b border-dominus-border px-6 py-4 bg-dominus-void/90 backdrop-blur-sm sticky top-0 z-10 print:hidden">
       <div class="max-w-3xl mx-auto flex items-center justify-between">
         <NuxtLink to="/" class="flex items-center gap-2 text-dominus-subtle hover:text-dominus-gold text-[10px] font-black tracking-[2px] uppercase transition-colors">
@@ -92,63 +114,182 @@
       </div>
     </header>
 
-    <main id="relatorio-pdf" class="max-w-3xl mx-auto px-4 py-8 space-y-6 print:px-0 print:py-0">
+    <!-- ═══════════════════════════════════════════════
+         Conteúdo principal
+    ════════════════════════════════════════════════ -->
+    <main id="relatorio-pdf" class="max-w-3xl mx-auto px-4 py-10 space-y-8 print:max-w-none print:w-full print:px-8 print:py-10 print:space-y-6">
 
-      <!-- Título -->
-      <div class="text-center space-y-2 print:mb-6">
-        <p class="text-[10px] font-black tracking-[3px] uppercase text-dominus-subtle">Avaliação Empresarial</p>
-        <h1 class="font-display text-3xl font-black text-dominus-gold">Diagnóstico 360°</h1>
-      </div>
-
-      <!-- Score cards -->
-      <div class="grid grid-cols-3 gap-4">
-        <div class="bg-dominus-surface border border-dominus-border rounded-xl p-5 text-center relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dominus-gold/30 to-transparent" />
-          <p class="font-display text-4xl font-black text-dominus-gold">{{ resultado.totalScore.toFixed(1) }}</p>
-          <p class="text-[9px] font-bold tracking-[2px] uppercase text-dominus-subtle mt-1">de 50 pontos</p>
+      <!-- ─────────────────────────────────
+           1. Hero — Pontuação + Classificação
+      ────────────────────────────────── -->
+      <section class="text-center space-y-6">
+        <div>
+          <p class="text-[10px] font-black tracking-[3px] uppercase text-dominus-subtle mb-2">Avaliação Empresarial</p>
+          <h1 class="font-display text-3xl font-black text-dominus-gold">Diagnóstico de Maturidade</h1>
         </div>
-        <div class="bg-dominus-surface border border-dominus-border rounded-xl p-5 text-center relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dominus-gold/30 to-transparent" />
-          <p class="font-display text-4xl font-black text-dominus-gold">{{ resultado.percentualGeral.toFixed(0) }}%</p>
-          <p class="text-[9px] font-bold tracking-[2px] uppercase text-dominus-subtle mt-1">Grau de atendimento</p>
-        </div>
-        <div class="rounded-xl p-5 text-center relative overflow-hidden" :style="{ backgroundColor: etapaBgColor }">
-          <p class="font-display text-4xl font-black text-dominus-void">{{ resultado.etapa }}</p>
-          <p class="text-[9px] font-bold tracking-[2px] uppercase mt-1" style="color:rgba(10,10,10,0.6)">Etapa atual</p>
-        </div>
-      </div>
 
-      <!-- Etapa card -->
-      <EtapaCard :info="store.infoEtapa" />
+        <!-- Gauge SVG -->
+        <div class="flex flex-col items-center">
+          <div class="relative inline-flex items-center justify-center">
+            <!-- SVG circular gauge -->
+            <svg width="200" height="200" viewBox="0 0 200 200" class="-rotate-90">
+              <!-- Track -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#1a1a1a" stroke-width="10" />
+              <!-- Progress -->
+              <circle
+                cx="100" cy="100" r="80"
+                fill="none"
+                :stroke="corNota"
+                stroke-width="10"
+                stroke-linecap="round"
+                :stroke-dasharray="502"
+                :stroke-dashoffset="502 - (502 * resultado.notaGeral / 100)"
+                style="transition: stroke-dashoffset 1.2s ease-out;"
+              />
+            </svg>
+            <!-- Texto central -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="font-display text-5xl font-black leading-none" :style="{ color: corNota }">
+                {{ resultado.notaGeral.toFixed(0) }}
+              </span>
+              <span class="text-dominus-subtle text-sm font-bold">/ 100</span>
+            </div>
+          </div>
 
-      <!-- Radar chart -->
-      <div class="bg-dominus-surface border border-dominus-border rounded-xl p-6 relative overflow-hidden print:border print:shadow-none">
+          <!-- Badge de classificação -->
+          <div
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border mt-2"
+            :style="{ borderColor: `${corNota}40`, background: `${corNota}10`, color: corNota }"
+          >
+            <span class="font-black text-sm tracking-[2px] uppercase">{{ store.infoClassificacao.titulo }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────
+           2. Classificação geral (Página 1)
+      ────────────────────────────────── -->
+      <section class="print-break-inside-avoid">
+        <h2 class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold mb-4">Sua Classificação</h2>
+        <ClassificacaoCard :info="store.infoClassificacao" />
+      </section>
+
+      <!-- ─────────────────────────────────
+           3. Notas por pilar (Página 2)
+      ────────────────────────────────── -->
+      <section class="print-break-before">
+        <h2 class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold mb-4">Pontuação por Pilar</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <PilarCard
+            v-for="r in resultado.resultadosPilares"
+            :key="r.pilarId"
+            :resultado="r"
+            :destaque="r.pilarId === resultado.pilarMaisForte.pilarId || r.pilarId === resultado.pilarMaisFraco.pilarId"
+          />
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────
+           4. Radar chart (Página 2)
+      ────────────────────────────────── -->
+      <section class="bg-dominus-surface border border-dominus-border rounded-xl p-6 relative overflow-hidden print:border print:shadow-none print-break-inside-avoid">
         <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dominus-gold/30 to-transparent" />
-        <h2 class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold mb-6 text-center">Desempenho por Área</h2>
+        <h2 class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold mb-6 text-center">Mapa de Maturidade</h2>
         <ClientOnly>
-          <RadarChart :scores="resultado.scoresPorSecao" />
+          <RadarChart :scores="resultado.resultadosPilares.map((r) => r.nota)" />
           <template #fallback>
             <div class="h-64 flex items-center justify-center text-dominus-subtle text-sm">Carregando gráfico…</div>
           </template>
         </ClientOnly>
-      </div>
+      </section>
 
-      <!-- Recomendações -->
-      <div class="space-y-3 print:space-y-2">
-        <h2 class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold">Recomendações por Área</h2>
-        <SecaoCard
-          v-for="(secao, i) in secoes"
-          :key="secao.id"
-          :secao="secao"
-          :score="resultado.scoresPorSecao[i] ?? 0"
-        />
-      </div>
+      <!-- ─────────────────────────────────
+           5. Diagnóstico combinado (Página 3)
+      ────────────────────────────────── -->
+      <section v-if="resultado.diagnosticoCombinado.length > 0" class="print-break-before print-break-inside-avoid">
+        <h2 class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold mb-4">Diagnóstico Estratégico</h2>
+        <div class="space-y-3">
+          <div
+            v-for="(msg, i) in resultado.diagnosticoCombinado"
+            :key="i"
+            class="bg-dominus-surface border border-dominus-border rounded-xl p-5 relative overflow-hidden flex gap-4"
+          >
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dominus-gold/20 to-transparent" />
+            <span class="text-dominus-gold text-lg flex-shrink-0 mt-0.5">⚡</span>
+            <p class="text-dominus-muted text-sm leading-relaxed">{{ msg }}</p>
+          </div>
+        </div>
+      </section>
 
-      <!-- CTA rodapé -->
-      <div ref="rodape" class="bg-dominus-surface border border-dominus-border rounded-xl p-6 text-center space-y-4 relative overflow-hidden print:hidden">
-        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dominus-gold to-transparent" />
-        <p class="text-[9px] font-black tracking-[3px] uppercase text-dominus-subtle">Próximo passo</p>
-        <p class="text-dominus-muted text-sm">Quer avançar para a próxima etapa com estratégia?</p>
+      <!-- ─────────────────────────────────
+           6. Pilar mais forte / mais fraco (Página 3)
+      ────────────────────────────────── -->
+      <section :class="{ 'print-break-before': resultado.diagnosticoCombinado.length === 0 }" class="print-break-inside-avoid">
+        <h2 class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold mb-4">Destaques</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- Mais forte -->
+          <div class="bg-dominus-surface border border-green-500/20 rounded-xl p-5 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500/50 to-transparent" />
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center text-xs">✦</span>
+              <span class="text-[9px] font-black tracking-[2px] uppercase text-green-400">Ponto Forte</span>
+            </div>
+            <p class="text-white font-black text-sm mb-1">{{ resultado.pilarMaisForte.icone }} {{ resultado.pilarMaisForte.titulo }}</p>
+            <p class="font-display text-3xl font-black text-green-400 mb-2">{{ resultado.pilarMaisForte.nota.toFixed(0) }}<span class="text-green-600 text-lg">/100</span></p>
+            <p class="text-dominus-muted text-xs leading-relaxed">{{ analiseForte }}</p>
+          </div>
+
+          <!-- Mais fraco -->
+          <div class="bg-dominus-surface border border-red-500/20 rounded-xl p-5 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center text-xs">⚠</span>
+              <span class="text-[9px] font-black tracking-[2px] uppercase text-red-400">Ponto Vulnerável</span>
+            </div>
+            <p class="text-white font-black text-sm mb-1">{{ resultado.pilarMaisFraco.icone }} {{ resultado.pilarMaisFraco.titulo }}</p>
+            <p class="font-display text-3xl font-black text-red-400 mb-2">{{ resultado.pilarMaisFraco.nota.toFixed(0) }}<span class="text-red-600 text-lg">/100</span></p>
+            <p class="text-dominus-muted text-xs leading-relaxed">{{ analiseFraco }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────
+           7. Principais riscos (Página 3)
+      ────────────────────────────────── -->
+      <section v-if="resultado.riscos.length > 0" class="print-break-inside-avoid">
+        <h2 class="text-[10px] font-black tracking-[3px] uppercase text-dominus-gold mb-4">Principais Riscos Identificados</h2>
+        <div class="bg-dominus-surface border border-dominus-border rounded-xl p-5 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent" />
+          <ul class="space-y-3">
+            <li
+              v-for="(risco, i) in resultado.riscos"
+              :key="i"
+              class="flex items-start gap-3 text-sm text-dominus-muted"
+            >
+              <span class="text-red-400 flex-shrink-0 mt-0.5">▸</span>
+              {{ risco }}
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────
+           8. Próximo passo + CTA
+      ────────────────────────────────── -->
+      <section ref="rodape" class="bg-dominus-surface border border-dominus-border rounded-xl p-7 text-center space-y-5 relative overflow-hidden print:hidden">
+        <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-dominus-gold to-transparent" />
+
+        <div>
+          <p class="text-[9px] font-black tracking-[3px] uppercase text-dominus-subtle mb-2">Próximo Passo</p>
+          <h2 class="font-display text-xl font-black text-white leading-snug mb-3">
+            Seu diagnóstico revelou onde<br /><span class="text-dominus-gold">sua empresa está hoje.</span>
+          </h2>
+          <p class="text-dominus-muted text-sm leading-relaxed max-w-sm mx-auto">
+            {{ resultado.proximoPasso }}
+          </p>
+        </div>
+
         <div class="flex flex-col sm:flex-row gap-3 justify-center">
           <button
             class="px-6 py-3 rounded-lg border border-dominus-border text-[10px] font-black tracking-[2px] uppercase text-dominus-subtle hover:border-dominus-subtle transition-all duration-200"
@@ -157,80 +298,243 @@
             ↩ Refazer Diagnóstico
           </button>
           <button
-            class="px-6 py-3 rounded-lg text-[10px] font-black tracking-[2px] uppercase text-dominus-void transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 shadow-lg shadow-dominus-gold/20"
+            class="px-8 py-3.5 rounded-lg text-[11px] font-black tracking-[2px] uppercase text-dominus-void transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 shadow-lg shadow-dominus-gold/20"
             style="background: linear-gradient(135deg, #C9A84C, #E8CC80, #C9A84C);"
             @click="modalAberto = true"
           >
-            📋 Diagnóstico Completo
+            📋 Agendar Análise Gratuita
           </button>
         </div>
-      </div>
+      </section>
 
     </main>
+
+    <!-- Botão Flutuante Customizado (Substitui o do Cal.com) -->
+    <Transition name="fade">
+      <button
+        v-if="!modalAberto"
+        class="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full text-xs font-black tracking-widest uppercase text-dominus-void transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 shadow-xl shadow-dominus-gold/30 flex items-center gap-2 print:hidden"
+        style="background: linear-gradient(135deg, #C9A84C, #E8CC80, #C9A84C);"
+        @click="modalAberto = true"
+      >
+        <svg class="w-4 h-4 flex-shrink-0 text-dominus-void" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span>Agendar Mentoria Gratuita</span>
+      </button>
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { SECOES } from '~/shared/types/Diagnostico'
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
+import { PILARES, INFO_CLASSIFICACOES } from '~/shared/types/Diagnostico'
 import { useDiagnosticoStore } from '~/stores/diagnostico'
+import { usePdf } from '~/composables/usePdf'
+import { useDiagnosticoSave } from '~/composables/useDiagnosticoSave'
 
 definePageMeta({ layout: false })
 
 const store = useDiagnosticoStore()
 const router = useRouter()
 const { gerarPdf } = usePdf()
-const secoes = SECOES
+const { salvar } = useDiagnosticoSave()
+const runtimeConfig = useRuntimeConfig()
+const calLink = computed(() => runtimeConfig.public.calLink)
+
 const resultado = computed(() => store.resultado)
 const modalAberto = ref(false)
 const rodape = ref<HTMLElement | null>(null)
 
-const beneficios = [
-  'Diagnóstico completo e personalizado da sua empresa',
-  'Sair do improviso e conquistar previsibilidade',
-  'Plano de ação claro para avançar de etapa',
-]
-
-onMounted(() => {
-  if (store.totalScore === 0 && Object.keys(store.respostas).length === 0) {
-    router.replace('/diagnostico')
-    return
-  }
-  const observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0]?.isIntersecting) {
-        setTimeout(() => { modalAberto.value = true }, 600)
-        observer.disconnect()
-      }
-    },
-    { threshold: 0.6 },
-  )
-  if (rodape.value) observer.observe(rodape.value)
+// ── Cor da nota geral ──────────────────────────────────────────────
+const corNota = computed(() => {
+  const n = resultado.value.notaGeral
+  if (n >= 90) return '#22c55e'
+  if (n >= 75) return '#C9A84C'
+  if (n >= 60) return '#eab308'
+  if (n >= 40) return '#f97316'
+  return '#ef4444'
 })
 
+// ── Textos de análise do pilar destaque ────────────────────────────
+const analiseForte = computed(() => {
+  const pilar = PILARES.find((p) => p.id === resultado.value.pilarMaisForte.pilarId)
+  const n = resultado.value.pilarMaisForte.nota
+  if (!pilar) return ''
+  if (n >= 75) return pilar.analiseAlta
+  if (n >= 50) return pilar.analiseMedia
+  return pilar.analiseBaixa
+})
+
+const analiseFraco = computed(() => {
+  const pilar = PILARES.find((p) => p.id === resultado.value.pilarMaisFraco.pilarId)
+  if (!pilar) return ''
+  return pilar.analiseBaixa
+})
+
+// ── Benefícios do modal ────────────────────────────────────────────
+const beneficios = [
+  'Análise estratégica individual da sua empresa',
+  'Identificação do pilar prioritário para estruturar primeiro',
+  'Plano de ação claro para sair do improviso e gerar previsibilidade',
+]
+
+// ── Link WhatsApp ──────────────────────────────────────────────────
 const whatsappLink = computed(() => {
   const r = resultado.value
-  const info = store.infoEtapa
+  const info = store.infoClassificacao
+  const pre = store.preQualificacao
+  const pilares = r.resultadosPilares
+    .map((p) => `• ${p.codigo} — ${p.titulo}: ${p.nota.toFixed(0)}/100`)
+    .join('\n')
+
+  const saudacao = pre.nome && pre.empresa
+    ? `Olá! Meu nome é ${pre.nome}, da empresa ${pre.empresa}. Acabei de concluir o Diagnóstico de Maturidade Empresarial DOMINUS e gostaria de agendar minha Mentoria Gratuita.`
+    : `Olá! Acabei de concluir o Diagnóstico de Maturidade Empresarial DOMINUS e gostaria de agendar minha Mentoria Gratuita.`
+
   const msg = [
-    `Olá! Acabei de fazer o Diagnóstico Empresarial 360° e gostaria de agendar minha consultoria gratuita.`,
+    saudacao,
     ``,
     `📊 *Meu resultado:*`,
-    `• Pontuação: ${r.totalScore.toFixed(1)}/50`,
-    `• Grau de atendimento: ${r.percentualGeral.toFixed(0)}%`,
-    `• Etapa atual: *${r.etapa}* — ${info.slogan}`,
+    `• Pontuação geral: ${r.notaGeral.toFixed(0)}/100`,
+    `• Classificação: *${info.titulo}*`,
     ``,
-    `${info.perfil}`,
+    `*Notas por pilar:*`,
+    pilares,
     ``,
     `Aguardo o contato! 🚀`,
   ].join('\n')
+
   return `https://wa.me/553291397104?text=${encodeURIComponent(msg)}`
 })
 
-const etapaBgColor = computed(() => ({
-  A: '#22c55e', B: '#C9A84C', C: '#f97316', D: '#ef4444',
-}[store.infoEtapa.etapa]))
+// ── Limpeza do Cal.com (Evitar duplicidade com HMR / Cache) ───────────
+function limparCalcomLeftovers() {
+  if (typeof document === 'undefined') return
+  // Remove botões flutuantes injetados pelo script nativo do Cal.com
+  document.querySelectorAll('.__cal-floating-button, [class*="floating-button"], [id*="floating-button"]').forEach(el => el.remove())
+  // Remove iframes de pop-up flutuantes do Cal.com (mantém apenas o inline dentro do nosso modal)
+  document.querySelectorAll('iframe[src*="cal.com"]').forEach(el => {
+    const inlineContainer = document.getElementById('my-cal-inline-60min')
+    if (inlineContainer && !inlineContainer.contains(el)) {
+      el.remove()
+    }
+  })
+}
 
+// ── Ações ──────────────────────────────────────────────────────────
 function baixarPdf() { gerarPdf() }
-function refazer() { store.resetar(); router.push('/diagnostico') }
+
+function refazer() {
+  store.resetar()
+  router.push('/diagnostico')
+}
+
+// ── Lifecycle ──────────────────────────────────────────────────────
+onMounted(async () => {
+  limparCalcomLeftovers()
+
+  // Redireciona se não há respostas
+  if (Object.keys(store.respostas).length === 0) {
+    router.replace('/diagnostico')
+    return
+  }
+
+  // Salva no Supabase silenciosamente
+  await salvar(resultado.value, store.respostas)
+
+  // Abre modal quando o rodapé aparece
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0]?.isIntersecting) {
+        setTimeout(() => { modalAberto.value = true }, 800)
+        observer.disconnect()
+      }
+    },
+    { threshold: 0.5 },
+  )
+  if (rodape.value) observer.observe(rodape.value)
+
+  // Inicializa o Cal.com
+  const C = window as any
+  if (!C.Cal) {
+    (function (C: any, A: string, L: string) {
+      const p = function (a: any, ar: any) { a.q.push(ar); };
+      const d = C.document;
+      C.Cal = C.Cal || function () {
+        const cal = C.Cal;
+        const ar = arguments as any;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); } as any;
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window as any, "https://app.cal.com/embed/embed.js", "init");
+  }
+
+  C.Cal("init", "60min", { origin: "https://app.cal.com" });
+
+  C.Cal.ns["60min"]("ui", {
+    theme: "dark",
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+})
+
+onUnmounted(() => {
+  document.body.classList.remove('modal-aberto-cal')
+  limparCalcomLeftovers()
+})
+
+// ── Watcher para inicializar Cal.com quando o modal abrir ───────────
+watch(modalAberto, (isOpen) => {
+  if (isOpen) {
+    document.body.classList.add('modal-aberto-cal')
+    nextTick(() => {
+      const C = window as any
+      C.Cal("init", "60min", { origin: "https://app.cal.com" });
+
+      C.Cal.ns["60min"]("inline", {
+        elementOrSelector: "#my-cal-inline-60min",
+        config: {
+          layout: "month_view",
+          useSlotsViewOnSmallScreen: "true",
+          theme: "dark",
+          name: store.preQualificacao.nome || "",
+          email: store.preQualificacao.email || ""
+        },
+        calLink: calLink.value,
+      });
+
+      C.Cal.ns["60min"]("ui", {
+        theme: "dark",
+        hideEventTypeDetails: false,
+        layout: "month_view"
+      });
+    })
+  } else {
+    document.body.classList.remove('modal-aberto-cal')
+    limparCalcomLeftovers()
+  }
+})
 </script>
 
 <style>
@@ -239,9 +543,44 @@ function refazer() { store.resetar(); router.push('/diagnostico') }
 .modal-enter-from   { opacity: 0; transform: scale(0.9); }
 .modal-leave-to     { opacity: 0; transform: scale(0.95); }
 
+/* Transição do botão flutuante */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Esconde o botão flutuante enquanto o modal de agendamento está ativo */
+body.modal-aberto-cal .__cal-floating-button,
+body.modal-aberto-cal [class*="floating-button"],
+body.modal-aberto-cal [id*="floating-button"] {
+  display: none !important;
+}
+
 @media print {
-  @page { size: A4 portrait; margin: 16mm 14mm; }
+  @page { size: A4 portrait; margin: 12mm 12mm; }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   body { background: #0a0a0a !important; color: white !important; font-family: Montserrat, Arial, sans-serif; }
+
+  .print-break-before {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+  .print-break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Keep the background dark grey and borders readable when printing */
+  .bg-dominus-surface {
+    background-color: #111111 !important;
+  }
+  .border-dominus-border {
+    border-color: #2d2d2d !important;
+  }
 }
 </style>
